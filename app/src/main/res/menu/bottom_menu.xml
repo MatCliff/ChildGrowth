@@ -5,14 +5,16 @@
     <item
         android:id="@+id/itemMeasure"
         android:icon="@drawable/outline_accessible_menu_24"
+        android:title="Home"
         app:showAsAction="always" />
     <item
         android:id="@+id/itemData"
         android:icon="@drawable/baseline_view_list_24"
-        android:visible="true"
+        android:title="Log"
         app:showAsAction="always" />
     <item
         android:id="@+id/itemProfile"
         android:icon="@drawable/baseline_person_24"
+        android:title="Profile"
         app:showAsAction="always" />
 </menu>
