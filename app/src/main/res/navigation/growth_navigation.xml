@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/itemData"
         android:name="com.ubaya.childgrowth.DataFragment"
-        android:label="fragment_data"
+        android:label="Log"
         tools:layout="@layout/fragment_data" />
     <fragment
         android:id="@+id/itemMeasure"
         android:name="com.ubaya.childgrowth.MeasureFragment"
-        android:label="fragment_measure"
+        android:label="Measure"
         tools:layout="@layout/fragment_measure" />
     <fragment
         android:id="@+id/itemProfile"
         android:name="com.ubaya.childgrowth.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

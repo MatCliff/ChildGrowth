@@ -10,10 +10,8 @@ import com.ubaya.childgrowth.databinding.FragmentMeasureBinding
 
 class MeasureFragment : Fragment() {
     private lateinit var binding: FragmentMeasureBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMeasureBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
         return binding.root
