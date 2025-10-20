@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/itemData"
-        android:name="com.ubaya.childgrowth.DataFragment"
+        android:name="com.ubaya.childgrowth.view.DataFragment"
         android:label="Log"
         tools:layout="@layout/fragment_data" />
     <fragment
         android:id="@+id/itemMeasure"
-        android:name="com.ubaya.childgrowth.MeasureFragment"
+        android:name="com.ubaya.childgrowth.view.MeasureFragment"
         android:label="Measure"
         tools:layout="@layout/fragment_measure" />
     <fragment
         android:id="@+id/itemProfile"
-        android:name="com.ubaya.childgrowth.ProfileFragment"
+        android:name="com.ubaya.childgrowth.view.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
