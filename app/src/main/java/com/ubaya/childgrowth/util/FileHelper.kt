@@ -43,7 +43,7 @@ class FileHelper(val context: Context) {
         }
     }
 
-    fun getFIlePath(): String{
+    fun getFilePath(): String{
         return getFile().absolutePath
     }
 }
