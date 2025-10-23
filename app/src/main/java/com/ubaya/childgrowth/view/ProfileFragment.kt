@@ -56,10 +56,6 @@ class ProfileFragment : Fragment() {
             Toast.makeText(requireContext(), "Name must contain only letters and spaces", Toast.LENGTH_SHORT).show()
             return@setOnClickListener
         }
-            if (!isValidDate(inputBirthdate)) {
-            Toast.makeText(requireContext(), "Birthdate must be in format DD/MM/YYYY", Toast.LENGTH_SHORT).show()
-            return@setOnClickListener
-        }
 
 
             sharePref.edit().apply{
@@ -75,16 +71,7 @@ class ProfileFragment : Fragment() {
         val namePattern = Pattern.compile("^[a-zA-Z\\s.'-]+$")
         return namePattern.matcher(name).matches() && name.length >= 2
     }
-    private fun isValidDate(date: String): Boolean {
-        return try {
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            dateFormat.isLenient = false // Strict validation
-            dateFormat.parse(date)
-            true
-        } catch (e: Exception) {
-            false
-        }
-    }
+
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
