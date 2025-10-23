@@ -29,7 +29,7 @@ class DataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         viewModel.refresh()
-        viewModel.testSaveFile()
+        //viewModel.testSaveFile()
         binding.recViewGrowth.layoutManager = LinearLayoutManager(context)
         binding.recViewGrowth.adapter = growthListAdapter
 

@@ -11,29 +11,52 @@ class DataListAdapter(val growthList: ArrayList<Child>):
     class DataViewHolder(val binding: DataListItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    private val header = 0
+    private val item = 1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):DataViewHolder {
         val binding = DataListItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false)
         return DataViewHolder(binding)
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) {
+            header
+        } else {
+            item
+        }
+    }
+
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.binding.txtAge.text = "AGE"
-        holder.binding.txtHeight.text = "Height (cm)"
-        holder.binding.txtWeight.text = "Weight (kg)"
-        holder.binding.txtAge.text = growthList[position].age.toString()
-        holder.binding.txtHeight.text = growthList[position].height.toString()
-        holder.binding.txtWeight.text = growthList[position].weight.toString()
+        if(holder.itemViewType == header){
+            holder.binding.txtAge.text = "AGE"
+            holder.binding.txtHeight.text = "Height (cm)"
+            holder.binding.txtWeight.text = "Weight (kg)"
+
+            //Bold Tulisannya
+            holder.binding.txtAge.setTypeface(null, android.graphics.Typeface.BOLD)
+            holder.binding.txtHeight.setTypeface(null, android.graphics.Typeface.BOLD)
+            holder.binding.txtWeight.setTypeface(null, android.graphics.Typeface.BOLD)
+        }
+        else{
+            //position di kurangi 1 dikarenakan posisi 0 dipake header dan data yang kurang mulai dari 0
+            holder.binding.txtAge.text = growthList[position-1].age.toString()
+            holder.binding.txtHeight.text = growthList[position-1].height.toString()
+            holder.binding.txtWeight.text = growthList[position-1].weight.toString()
+        }
+
+
 
     }
 
     override fun getItemCount(): Int {
-        return growthList.size
+        return growthList.size + 1 //ditambah satu dikarenakan ada header
     }
 
-    fun updateGrowthList(newStudentList: ArrayList<Child>) {
+    fun updateGrowthList(newGrowthList: ArrayList<Child>) {
         growthList.clear()
-        growthList.addAll(newStudentList)
+        growthList.addAll(newGrowthList)
         notifyDataSetChanged()
     }
 

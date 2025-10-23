@@ -42,6 +42,8 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
                         try {
                             // Parse each line as a *single* Child object
                             val child = gson.fromJson(line, Child::class.java)
+                            dataLoadErrorLD.value = false
+                            Log.d("testing", "data error = false")
                             childList.add(child)
                         } catch (e: JsonSyntaxException) {
                             // This catch is important in case one line is corrupted
@@ -53,6 +55,7 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
 
                 growthLD.value = childList
                 loadingLD.value = false
+
             }
         } catch (e: Exception) {
             Log.e("ListViewModel", "Error reading file", e)
