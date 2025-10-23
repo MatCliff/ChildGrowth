@@ -37,10 +37,19 @@ class MeasureFragment : Fragment() {
                 Toast.makeText(requireContext(), "All fields must be filled", Toast.LENGTH_SHORT).show()
             }
 
+            val weight = weightText.toDoubleOrNull()
+            val height = heightText.toDoubleOrNull()
+            val age = ageText.toIntOrNull()
+
+            if(weight==null || height==null || age==null){
+                Toast.makeText(requireContext(), "Invalid input", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val measure = Child(
-                weightText.toDouble(),
-                heightText.toDouble(),
-                ageText.toInt()
+                weight,
+                height,
+                age
             )
 
             val jsonData = gson.toJson(measure)

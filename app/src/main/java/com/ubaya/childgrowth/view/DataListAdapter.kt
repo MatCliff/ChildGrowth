@@ -30,23 +30,17 @@ class DataListAdapter(val growthList: ArrayList<Child>):
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         if(holder.itemViewType == header){
-            holder.binding.txtAge.text = "AGE"
-            holder.binding.txtHeight.text = "Height (cm)"
-            holder.binding.txtWeight.text = "Weight (kg)"
-
             //Bold Tulisannya
             holder.binding.txtAge.setTypeface(null, android.graphics.Typeface.BOLD)
             holder.binding.txtHeight.setTypeface(null, android.graphics.Typeface.BOLD)
             holder.binding.txtWeight.setTypeface(null, android.graphics.Typeface.BOLD)
         }
         else{
-            //position di kurangi 1 dikarenakan posisi 0 dipake header dan data yang kurang mulai dari 0
+            //position di kurangi 1 karena posisi 0 dipake header dan data yang kurang mulai dari 0
             holder.binding.txtAge.text = growthList[position-1].age.toString()
             holder.binding.txtHeight.text = growthList[position-1].height.toString()
             holder.binding.txtWeight.text = growthList[position-1].weight.toString()
         }
-
-
 
     }
 
@@ -57,7 +51,6 @@ class DataListAdapter(val growthList: ArrayList<Child>):
     fun updateGrowthList(newGrowthList: ArrayList<Child>) {
         growthList.clear()
         growthList.addAll(newGrowthList)
-        notifyDataSetChanged()
     }
 
 }
