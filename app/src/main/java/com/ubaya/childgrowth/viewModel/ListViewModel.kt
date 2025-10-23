@@ -43,7 +43,6 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
                             // Parse each line as a *single* Child object
                             val child = gson.fromJson(line, Child::class.java)
                             dataLoadErrorLD.value = false
-                            Log.d("testing", "data error = false")
                             childList.add(child)
                         } catch (e: JsonSyntaxException) {
                             // This catch is important in case one line is corrupted
