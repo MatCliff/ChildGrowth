@@ -9,11 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.childgrowth.databinding.FragmentDataBinding
-import com.ubaya.childgrowth.viewModel.ListViewModel
+import com.ubaya.childgrowth.viewModel.ChildViewModel
 
 class DataFragment : Fragment() {
     private lateinit var binding: FragmentDataBinding
-    private lateinit var viewModel: ListViewModel
+    private lateinit var viewModel: ChildViewModel
     private val growthListAdapter  = DataListAdapter(arrayListOf())
 
 
@@ -27,7 +27,7 @@ class DataFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ChildViewModel::class.java)
         viewModel.refresh()
         binding.recViewGrowth.layoutManager = LinearLayoutManager(context)
         binding.recViewGrowth.adapter = growthListAdapter

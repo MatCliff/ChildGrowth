@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ubaya.childgrowth.util.DB_NAME
 
 @Database(entities = [User::class, Child::class],version = 1)
 abstract class ChildGrowthDatabase : RoomDatabase() {
@@ -19,17 +20,18 @@ abstract class ChildGrowthDatabase : RoomDatabase() {
         fun buildDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,
             ChildGrowthDatabase::class.java,
-            "childgrowthdb"
+            DB_NAME
         ).build()
 
-        operator fun invoke(context: Context){
+        operator fun invoke(context: Context): ChildGrowthDatabase {
             if (instance == null) {
                 synchronized(LOCK) {
-                    instance = buildDatabase(context).also {
-                        instance = it
+                    if (instance == null) {
+                        instance = buildDatabase(context)
                     }
                 }
             }
+            return instance!!
         }
     }
 }
