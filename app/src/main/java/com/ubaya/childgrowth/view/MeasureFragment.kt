@@ -7,15 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.ubaya.childgrowth.databinding.FragmentMeasureBinding
 import com.ubaya.childgrowth.model.Child
 import com.ubaya.childgrowth.util.FileHelper
+import com.ubaya.childgrowth.viewModel.ChildViewModel
 
 class MeasureFragment : Fragment() {
     private lateinit var binding: FragmentMeasureBinding
-    private lateinit var fileHelper: FileHelper
-    private val gson = Gson()
+    private lateinit var viewModel: ChildViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMeasureBinding.inflate(inflater,container,false)
@@ -25,8 +26,7 @@ class MeasureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        fileHelper = FileHelper(requireContext())
+        viewModel = ViewModelProvider(this).get(ChildViewModel::class.java)
 
         binding.btnAddMeasure.setOnClickListener{
             val weightText = binding.txtInputWeight.text.toString()
@@ -52,8 +52,7 @@ class MeasureFragment : Fragment() {
                 age
             )
 
-            val jsonData = gson.toJson(measure)
-            fileHelper.addToFile(jsonData)
+            viewModel.addMeasure(measure)
             Toast.makeText(requireContext(), "Data added", Toast.LENGTH_SHORT).show()
 
             binding.txtInputWeight.setText("")

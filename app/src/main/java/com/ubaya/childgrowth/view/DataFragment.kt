@@ -42,9 +42,9 @@ class DataFragment : Fragment() {
         })
         viewModel.dataLoadErrorLD.observe(viewLifecycleOwner, Observer {
             if(it == true) {
-                binding.txtError?.visibility = View.VISIBLE
+                binding.txtError.visibility = View.VISIBLE
             } else {
-                binding.txtError?.visibility = View.GONE
+                binding.txtError.visibility = View.GONE
             }
         })
         viewModel.loadingLD.observe(viewLifecycleOwner, Observer {

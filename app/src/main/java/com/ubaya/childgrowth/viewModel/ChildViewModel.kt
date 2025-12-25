@@ -23,6 +23,13 @@ class ChildViewModel(application: Application) :
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
 
+    fun addMeasure(child: Child) {
+        launch {
+            val db = buildDb(getApplication())
+            db.childDao().insertAll(child)
+        }
+    }
+
     fun refresh() {
         loadingLD.postValue(true)
         dataLoadErrorLD.postValue(false)

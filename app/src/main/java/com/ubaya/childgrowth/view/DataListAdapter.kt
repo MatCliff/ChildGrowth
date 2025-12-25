@@ -48,9 +48,10 @@ class DataListAdapter(val growthList: ArrayList<Child>):
         return growthList.size + 1 //ditambah satu dikarenakan ada header
     }
 
-    fun updateGrowthList(newGrowthList: ArrayList<Child>) {
+    fun updateGrowthList(newGrowthList: List<Child>) {
         growthList.clear()
         growthList.addAll(newGrowthList)
+        notifyDataSetChanged()
     }
 
 }

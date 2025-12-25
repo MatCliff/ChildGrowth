@@ -10,5 +10,5 @@ interface UserDao {
     fun getUser(): User
 
     @Query("UPDATE user SET name=:name, bod=:bod, gender=:gender")
-    fun updateUser(name:String, bod:Long, gender:Int, id:Int)
+    fun updateUser(name:String, bod:Long, gender:Int)
 }
