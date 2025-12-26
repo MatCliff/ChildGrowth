@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.ubaya.childgrowth.databinding.FragmentProfileBinding
+import com.ubaya.childgrowth.viewmodel.ProfileViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -16,6 +18,7 @@ import java.util.regex.Pattern
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentProfileBinding.inflate(inflater,container,false)
@@ -26,47 +29,46 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharePref = requireActivity().getSharedPreferences("profile_data", Context.MODE_PRIVATE)
-
-        val name = sharePref.getString("name", "Udin Dindin")
-        val birthdate = sharePref.getString("birthdate", "01/05/2004")
-        val gender = sharePref.getString("gender", "Male")
-
-        binding.txtInputBirthdate.setOnClickListener {
-            showDatePicker()
-        }
-
-        binding.txtInputName.setText(name)
-        binding.txtInputBirthdate.setText(birthdate)
-        if(gender == "Male"){
-            binding.radioBtnMale.isChecked = true
-        }else{
-            binding.radioBtnFemale.isChecked = true
-        }
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel.refresh()
+        observeViewModel()
 
         binding.btnSaveProfile.setOnClickListener{
             val inputName = binding.txtInputName.text.toString()
             val inputBirthdate = binding.txtInputBirthdate.text.toString()
-            val inputGender = if(binding.radioBtnMale.isChecked) "Male" else "Female"
+            val inputGender = if(binding.radioBtnMale.isChecked) 0 else 1
 
-            if(inputName.isEmpty() || inputBirthdate.isEmpty() || inputGender.isEmpty()){
+            if(inputName.isEmpty() || inputBirthdate.isEmpty()){
                 Toast.makeText(requireContext(), "All fields must be filled", Toast.LENGTH_SHORT).show()
             }
             if (!isValidName(inputName)) {
-            Toast.makeText(requireContext(), "Name must contain only letters and spaces", Toast.LENGTH_SHORT).show()
-            return@setOnClickListener
-        }
-
-
-            sharePref.edit().apply{
-                putString("name", inputName)
-                putString("birthdate", inputBirthdate)
-                putString("gender", inputGender)
+                Toast.makeText(requireContext(), "Name must contain only letters and spaces", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val bodMillis = sdf.parse(inputBirthdate)?.time ?: return@setOnClickListener
+
+            viewModel.updateProfile(inputName, bodMillis, inputGender)
             Toast.makeText(requireContext(), "Profile saved", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun observeViewModel() {
+        viewModel.userLD.observe(viewLifecycleOwner) { user ->
+            binding.txtInputName.setText(user.name)
+
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            binding.txtInputBirthdate.setText(sdf.format(user.bod))
+
+            if (user.gender == 0) {
+                binding.radioBtnMale.isChecked = true
+            } else {
+                binding.radioBtnFemale.isChecked = true
+            }
+        }
+    }
+
     private fun isValidName(name: String): Boolean {
         val namePattern = Pattern.compile("^[a-zA-Z\\s.'-]+$")
         return namePattern.matcher(name).matches() && name.length >= 2

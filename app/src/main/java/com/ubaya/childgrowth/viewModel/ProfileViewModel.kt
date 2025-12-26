@@ -25,7 +25,27 @@ class ProfileViewModel(application: Application) :
     fun refresh() {
         launch {
             val db = buildDb(getApplication())
-            userLD.postValue(db.userDao().getUser())
+            var user = db.userDao().getUser()
+
+            //DEFAULT PROFILE
+            if (user == null) {
+                user = User(
+                    name = "Udin Dindin",
+                    bod = System.currentTimeMillis(),
+                    gender = 0 //0 = Male, 1 = Female
+                )
+                db.userDao().insertUser(user)
+            }
+
+            userLD.postValue(user)
+        }
+    }
+
+    fun updateProfile(name: String, bod: Long, gender: Int) {
+        launch {
+            val db = buildDb(getApplication())
+            db.userDao().updateUser(name, bod, gender)
+            refresh()
         }
     }
 
