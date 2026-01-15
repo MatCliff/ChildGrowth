@@ -42,10 +42,12 @@ class ProfileFragment : Fragment() {
             }
         }
         viewModel.showToastLD.observe(viewLifecycleOwner) { message ->
-            if(message != null) {
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            message?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                viewModel.showToastLD.value = null // reset
             }
         }
+
 
 
         // Observe userLD to populate inputs if needed

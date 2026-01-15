@@ -29,8 +29,11 @@ class MeasureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.messageLD.observe(viewLifecycleOwner) { msg ->
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+        viewModel.messageLD.observe(viewLifecycleOwner) { message ->
+            message?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                viewModel.messageLD.value = null // reset
+            }
         }
     }
 

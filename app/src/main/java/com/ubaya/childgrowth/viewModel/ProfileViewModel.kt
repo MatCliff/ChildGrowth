@@ -62,13 +62,15 @@ class ProfileViewModel(application: Application) :
             showToastLD.value = "Name cannot be empty"
             return
         }
-
+        showToastLD.postValue("Profile saved successfully")
         launch {
             val db = buildDb(getApplication())
             db.userDao().updateUser(name, bodMillis, gender)
-            showToastLD.postValue("Profile saved successfully")
+
             refresh()
+
         }
+
     }
     fun setGender(gender: Int) {
         userLD.value?.let {
