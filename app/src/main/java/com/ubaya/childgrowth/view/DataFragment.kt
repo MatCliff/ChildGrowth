@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.childgrowth.databinding.FragmentDataBinding
-import com.ubaya.childgrowth.viewModel.ChildViewModel
+import com.ubaya.childgrowth.viewmodel.ChildViewModel
 import com.ubaya.childgrowth.R
 
 class DataFragment : Fragment() {

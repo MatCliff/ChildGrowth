@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.ubaya.childgrowth.viewModel.ChildViewModel" />
+            type="com.ubaya.childgrowth.viewmodel.ChildViewModel" />
     </data>
 <FrameLayout
     android:layout_width="match_parent"

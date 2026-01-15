@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ubaya.childgrowth.viewmodel.ProfileViewModel" />
+    </data>
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ProfileFragment">
@@ -23,7 +29,8 @@
                 android:id="@+id/txtInputName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name" />
+                android:hint="Name"
+                android:text="@={viewModel.userLD.name}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -38,7 +45,10 @@
                 android:id="@+id/txtInputBirthdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Birth Date" />
+                android:hint="Birth Date"
+                android:text="@={viewModel.bodInput}"
+                android:onClick="@{() -> viewModel.onDatePickerClicked()}"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -64,12 +74,16 @@
                 android:id="@+id/radioBtnMale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="@{viewModel.userLD.gender == 0}"
+                android:onClick="@{() -> viewModel.setGender(0)}"
                 android:text="Male" />
 
             <RadioButton
                 android:id="@+id/radioBtnFemale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="@{viewModel.userLD.gender == 1}"
+                android:onClick="@{() -> viewModel.setGender(1)}"
                 android:text="Female" />
         </RadioGroup>
 
@@ -82,6 +96,8 @@
             app:cornerRadius="8dp"
             android:layout_marginEnd="20dp"
             android:text="Save"
-            android:textColorLink="#288DEB" />
+            android:textColorLink="#288DEB"
+            android:onClick="@{() -> viewModel.saveProfile()}"/>
     </LinearLayout>
 </FrameLayout>
+</layout>

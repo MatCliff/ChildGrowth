@@ -1,4 +1,4 @@
-package com.ubaya.childgrowth.viewModel
+package com.ubaya.childgrowth.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

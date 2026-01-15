@@ -12,7 +12,7 @@ import com.google.gson.Gson
 import com.ubaya.childgrowth.databinding.FragmentMeasureBinding
 import com.ubaya.childgrowth.model.Child
 import com.ubaya.childgrowth.util.FileHelper
-import com.ubaya.childgrowth.viewModel.ChildViewModel
+import com.ubaya.childgrowth.viewmodel.ChildViewModel
 
 class MeasureFragment : Fragment() {
     private lateinit var binding: FragmentMeasureBinding

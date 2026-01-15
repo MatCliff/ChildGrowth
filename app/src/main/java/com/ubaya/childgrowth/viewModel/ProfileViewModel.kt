@@ -10,13 +10,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 import kotlin.coroutines.CoroutineContext
 
 class ProfileViewModel(application: Application) :
     AndroidViewModel(application), CoroutineScope {
 
     val userLD = MutableLiveData<User>()
-    val loadingLD = MutableLiveData<Boolean>()
+    val nameInput = MutableLiveData<String>()
+    val bodInput = MutableLiveData<String>()
+    val genderInput = MutableLiveData<Int>() // 0 = Male, 1 = Female
+    val showDatePickerEvent = MutableLiveData<Boolean>()
+
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
@@ -38,8 +44,13 @@ class ProfileViewModel(application: Application) :
             }
 
             userLD.postValue(user)
+            bodInput.postValue(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(user.bod))
         }
     }
+    fun onDatePickerClicked() {
+        showDatePickerEvent.value = true
+    }
+
 
     fun updateProfile(name: String, bod: Long, gender: Int) {
         launch {
@@ -48,6 +59,26 @@ class ProfileViewModel(application: Application) :
             refresh()
         }
     }
+    fun saveProfile() {
+        val name = userLD.value?.name ?: return
+        val gender = userLD.value?.gender ?: 0
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val bodMillis = sdf.parse(bodInput.value ?: "")?.time ?: return
+
+
+        launch {
+            val db = buildDb(getApplication())
+            db.userDao().updateUser(name, bodMillis, gender)
+            refresh()
+        }
+    }
+    fun setGender(gender: Int) {
+        userLD.value?.let {
+            it.gender = gender
+            userLD.value = it // trigger LiveData update
+        }
+    }
+
 
     override fun onCleared() {
         super.onCleared()
