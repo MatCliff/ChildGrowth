@@ -41,6 +41,12 @@ class ProfileFragment : Fragment() {
                 viewModel.showDatePickerEvent.value = false
             }
         }
+        viewModel.showToastLD.observe(viewLifecycleOwner) { message ->
+            if(message != null) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         // Observe userLD to populate inputs if needed
         viewModel.userLD.observe(viewLifecycleOwner) { user ->

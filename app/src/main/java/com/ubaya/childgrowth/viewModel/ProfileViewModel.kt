@@ -22,6 +22,7 @@ class ProfileViewModel(application: Application) :
     val bodInput = MutableLiveData<String>()
     val genderInput = MutableLiveData<Int>() // 0 = Male, 1 = Female
     val showDatePickerEvent = MutableLiveData<Boolean>()
+    val showToastLD = MutableLiveData<String>()  // LiveData untuk notifikasi
 
 
     private val job = Job()
@@ -56,11 +57,16 @@ class ProfileViewModel(application: Application) :
         val gender = userLD.value?.gender ?: 0
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val bodMillis = sdf.parse(bodInput.value ?: "")?.time ?: return
-
+        val currentUser = userLD.value ?: return
+        if(currentUser.name.isBlank()) {
+            showToastLD.value = "Name cannot be empty"
+            return
+        }
 
         launch {
             val db = buildDb(getApplication())
             db.userDao().updateUser(name, bodMillis, gender)
+            showToastLD.postValue("Profile saved successfully")
             refresh()
         }
     }
