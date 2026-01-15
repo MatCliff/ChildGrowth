@@ -29,20 +29,14 @@ class DataListAdapter(val growthList: ArrayList<Child>):
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        if(holder.itemViewType == header){
-            //Bold Tulisannya
-            holder.binding.txtAge.setTypeface(null, android.graphics.Typeface.BOLD)
-            holder.binding.txtHeight.setTypeface(null, android.graphics.Typeface.BOLD)
-            holder.binding.txtWeight.setTypeface(null, android.graphics.Typeface.BOLD)
+        if (position == 0) {
+            holder.binding.isHeader = true
+        } else {
+            holder.binding.isHeader = false
+            holder.binding.child = growthList[position - 1]
         }
-        else{
-            //position di kurangi 1 karena posisi 0 dipake header dan data yang kurang mulai dari 0
-            holder.binding.txtAge.text = growthList[position-1].age.toString()
-            holder.binding.txtHeight.text = growthList[position-1].height.toString()
-            holder.binding.txtWeight.text = growthList[position-1].weight.toString()
-        }
-
     }
+
 
     override fun getItemCount(): Int {
         return growthList.size + 1 //ditambah satu dikarenakan ada header

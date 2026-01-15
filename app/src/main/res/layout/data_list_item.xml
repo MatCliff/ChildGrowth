@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="child"
+            type="com.ubaya.childgrowth.model.Child" />
+        <variable
+            name="isHeader"
+            type="Boolean" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -24,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Age"
+                android:text="@{isHeader ? `Age` : String.valueOf(child.age)}"
                 android:textAlignment="center" />
 
             <TextView
@@ -32,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Height (cm)"
+                android:text="@{isHeader ? `Height` : String.valueOf(child.height)}"
                 android:textAlignment="center" />
 
             <TextView
@@ -40,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Weight (kg)"
+                android:text="@{isHeader ? `Weight` : String.valueOf(child.weight)}"
                 app:cornerRadius="8dp"
                 app:backgroundTint="#2196F3"
                 android:textAlignment="center" />
@@ -48,3 +57,4 @@
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

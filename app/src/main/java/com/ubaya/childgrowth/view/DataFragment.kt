@@ -38,8 +38,16 @@ class DataFragment : Fragment() {
         viewModel.refresh()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.recViewGrowth.layoutManager = LinearLayoutManager(context)
-        binding.recViewGrowth.adapter = growthListAdapter
+        binding.recViewGrowth.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = growthListAdapter
+        }
+        //  Observer RecyclerView data
+        viewModel.growthLD.observe(viewLifecycleOwner) {
+            growthListAdapter.updateGrowthList(it)
+        }
+//        binding.recViewGrowth.layoutManager = LinearLayoutManager(context)
+//        binding.recViewGrowth.adapter = growthListAdapter
 
         observeViewModel()
 
@@ -49,24 +57,25 @@ class DataFragment : Fragment() {
         viewModel.growthLD.observe(viewLifecycleOwner, Observer {
             growthListAdapter.updateGrowthList(it)
         })
-        viewModel.dataLoadErrorLD.observe(viewLifecycleOwner, Observer {
-            if(it == true) {
-                binding.txtError.visibility = View.VISIBLE
-            } else {
-                binding.txtError.visibility = View.GONE
-            }
-        })
-        viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
-            if(it == true) {
-                binding.recViewGrowth.visibility = View.GONE
-                binding.progressLoad.visibility = View.VISIBLE
-            } else {
-                binding.recViewGrowth.visibility = View.VISIBLE
-                binding.progressLoad.visibility = View.GONE
-            }
-        })
-
-
     }
+//        viewModel.dataLoadErrorLD.observe(viewLifecycleOwner, Observer {
+//            if(it == true) {
+//                binding.txtError.visibility = View.VISIBLE
+//            } else {
+//                binding.txtError.visibility = View.GONE
+//            }
+//        })
+//        viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
+//            if(it == true) {
+//                binding.recViewGrowth.visibility = View.GONE
+//                binding.progressLoad.visibility = View.VISIBLE
+//            } else {
+//                binding.recViewGrowth.visibility = View.VISIBLE
+//                binding.progressLoad.visibility = View.GONE
+//            }
+//        })
+//
+//
+//    }
 
 }

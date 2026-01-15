@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ubaya.childgrowth.viewModel.ChildViewModel" />
+    </data>
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MeasureFragment">
@@ -37,7 +43,8 @@
                 style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Insert your weight" />
+                android:hint="Insert your weight"
+                android:text="@={viewModel.weightInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -63,7 +70,8 @@
                 android:id="@+id/txtInputHeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Insert your height" />
+                android:hint="Insert your height"
+                android:text="@={viewModel.heightInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -89,7 +97,8 @@
                 android:id="@+id/txtInputAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Insert your age" />
+                android:hint="Insert your age"
+                android:text="@={viewModel.ageInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -101,6 +110,8 @@
             app:cornerRadius="8dp"
             app:backgroundTint="#2196F3"
             android:layout_marginEnd="20dp"
-            android:text="Add Data" />
+            android:text="Add Data"
+            android:onClick="@{()->viewModel.addMeasurement()}" />
     </LinearLayout>
 </FrameLayout>
+</layout>
