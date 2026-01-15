@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="listData"
+            name="viewModel"
             type="com.ubaya.childgrowth.viewmodel.ChildViewModel" />
     </data>
 <FrameLayout
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Insert your weight"
-                android:text="@={listData.weightInput}"/>
+                android:text="@={viewModel.weightInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Insert your height"
-                android:text="@={listData.heightInput}"/>
+                android:text="@={viewModel.heightInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Insert your age"
-                android:text="@={listData.ageInput}"/>
+                android:text="@={viewModel.ageInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -111,7 +111,7 @@
             app:backgroundTint="#2196F3"
             android:layout_marginEnd="20dp"
             android:text="Add Data"
-            android:onClick="@{()->listData.addMeasurement()}" />
+            android:onClick="@{()->viewModel.addMeasurement()}" />
     </LinearLayout>
 </FrameLayout>
 </layout>
