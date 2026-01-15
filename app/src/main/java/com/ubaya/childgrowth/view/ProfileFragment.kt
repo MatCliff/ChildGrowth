@@ -23,7 +23,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        binding.viewModel = viewModel
+        binding.profile = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root

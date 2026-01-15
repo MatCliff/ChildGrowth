@@ -22,7 +22,7 @@ class MeasureFragment : Fragment() {
         binding = FragmentMeasureBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this).get(ChildViewModel::class.java)
-        binding.viewModel = viewModel
+        binding.measure = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

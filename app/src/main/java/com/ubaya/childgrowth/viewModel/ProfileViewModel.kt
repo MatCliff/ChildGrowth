@@ -51,14 +51,6 @@ class ProfileViewModel(application: Application) :
         showDatePickerEvent.value = true
     }
 
-
-    fun updateProfile(name: String, bod: Long, gender: Int) {
-        launch {
-            val db = buildDb(getApplication())
-            db.userDao().updateUser(name, bod, gender)
-            refresh()
-        }
-    }
     fun saveProfile() {
         val name = userLD.value?.name ?: return
         val gender = userLD.value?.gender ?: 0

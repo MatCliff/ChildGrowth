@@ -33,7 +33,7 @@ class DataListAdapter(val growthList: ArrayList<Child>):
             holder.binding.isHeader = true
         } else {
             holder.binding.isHeader = false
-            holder.binding.child = growthList[position - 1]
+            holder.binding.listData = growthList[position - 1]
         }
     }
 
