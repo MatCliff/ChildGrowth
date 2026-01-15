@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{isHeader ? `Age` : String.valueOf(child.age)}"
+                android:text="@{ String.valueOf(child.age)}"
                 android:textAlignment="center" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{isHeader ? `Height` : String.valueOf(child.height)}"
+                android:text="@{String.valueOf(child.height)}"
                 android:textAlignment="center" />
 
             <TextView
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{isHeader ? `Weight` : String.valueOf(child.weight)}"
+                android:text="@{String.valueOf(child.weight)}"
                 app:cornerRadius="8dp"
                 app:backgroundTint="#2196F3"
                 android:textAlignment="center" />

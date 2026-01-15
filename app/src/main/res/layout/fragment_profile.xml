@@ -46,6 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Birth Date"
+                android:focusable="false"
+                android:clickable="true"
                 android:text="@={viewModel.bodInput}"
                 android:onClick="@{() -> viewModel.onDatePickerClicked()}"
                 />
