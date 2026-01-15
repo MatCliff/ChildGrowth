@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="viewModel"
+            name="profile"
             type="com.ubaya.childgrowth.viewmodel.ProfileViewModel" />
     </data>
 <FrameLayout
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
-                android:text="@={viewModel.userLD.name}"/>
+                android:text="@={profile.userLD.name}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -46,8 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Birth Date"
-                android:text="@={viewModel.bodInput}"
-                android:onClick="@{() -> viewModel.onDatePickerClicked()}"
+                android:text="@={profile.bodInput}"
+                android:onClick="@{() -> profile.onDatePickerClicked()}"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,16 +74,16 @@
                 android:id="@+id/radioBtnMale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="@{viewModel.userLD.gender == 0}"
-                android:onClick="@{() -> viewModel.setGender(0)}"
+                android:checked="@{profile.userLD.gender == 0}"
+                android:onClick="@{() -> profile.setGender(0)}"
                 android:text="Male" />
 
             <RadioButton
                 android:id="@+id/radioBtnFemale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="@{viewModel.userLD.gender == 1}"
-                android:onClick="@{() -> viewModel.setGender(1)}"
+                android:checked="@{profile.userLD.gender == 1}"
+                android:onClick="@{() -> profile.setGender(1)}"
                 android:text="Female" />
         </RadioGroup>
 
@@ -97,7 +97,7 @@
             android:layout_marginEnd="20dp"
             android:text="Save"
             android:textColorLink="#288DEB"
-            android:onClick="@{() -> viewModel.saveProfile()}"/>
+            android:onClick="@{() -> profile.saveProfile()}"/>
     </LinearLayout>
 </FrameLayout>
 </layout>
