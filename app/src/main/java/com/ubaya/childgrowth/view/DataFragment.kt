@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ubaya.childgrowth.databinding.FragmentDataBinding
 import com.ubaya.childgrowth.viewModel.ChildViewModel
+import com.ubaya.childgrowth.R
 
 class DataFragment : Fragment() {
     private lateinit var binding: FragmentDataBinding
@@ -21,7 +23,12 @@ class DataFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDataBinding.inflate(inflater,container,false)
+        binding =  DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_data,
+            container,
+            false
+        )
         return binding.root
     }
 
@@ -29,6 +36,8 @@ class DataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ChildViewModel::class.java)
         viewModel.refresh()
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.recViewGrowth.layoutManager = LinearLayoutManager(context)
         binding.recViewGrowth.adapter = growthListAdapter
 
